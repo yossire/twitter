@@ -55,9 +55,9 @@ class User < ActiveRecord::Base
       user.provider = provider
       user.uid = follower.id
       @name = follower.name.dup
-      user.name = @name.force_encoding(Encoding::UTF_8)
+      user.name = @name.force_encoding("ISO-8859-1").encode("UTF-8")
       @screen_name = follower.screen_name.dup
-      user.screen_name = @screen_name.force_encoding(Encoding::UTF_8)
+      user.screen_name = @screen_name.force_encoding("ISO-8859-1").encode("UTF-8")
       user.followers_count = follower.followers_count
       user.pic_url = follower.profile_image_url.to_s
       begin
