@@ -1,0 +1,70 @@
+<div id="followers" class="box">
+  <div class="title">New Followers</div>
+  <div class="content">
+    <%if @activeFollowers%>
+      <ul class="users">
+        <% @activeFollowers.each do |f| %>
+        <li id="li_<%=f.id%>">
+          <div class="mask"></div>
+          <div class="image"><img src='<%=f.pic_url%>'/></div>
+          <div class="data">
+            <div>
+              <span class="name"><%=f.name%><span>
+              <span class="screen_name">@<%=f.screen_name%><span>
+            </div>
+            <div>No. of folowers: <%=f.followers_count%>
+              <% if f.followers_count > 100%>
+                <b style="color:green;">Influencer</b>
+              <%end%>
+            </div>
+            <div class="buttons">
+              <%= link_to "UnFollow", "unfollow/"+f.id.to_s, remote: true %>
+              <%= link_to "Say Hi", "say_hi/"+f.id.to_s, remote: true, object_id:f.id, id: "say_hi"+f.id.to_s, class:"say_hi" %>
+              <%= link_to "Delete", "delete/"+f.id.to_s, remote: true ,:confirm=>'Are you sure?' %>
+              <div style="display:none;">
+                <span><a href="unfollow/<%=f.id%>">UnFollow</a><span>
+                <span><a href="say_hi/<%=f.id%>">Say Hi</a><span>
+                <span><a href="delete/<%=f.id%>">Delete</a><span>
+              </div>
+            </div>
+          </div>
+        </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+</div>
+<div id="unfollowers" class="box">
+  <div class="title">UnFollowers</div>
+  <div class="content">
+    <%if @notActiveFollowers%>
+      <ul class="users">
+        <% @notActiveFollowers.each do |f| %>
+        <li>
+          <div class="mask"></div>
+          <div class="image"><img src='<%=f.pic_url%>'/></div>
+          <div class="data">
+            <div>
+              <span class="name"><%=f.name%><span>
+              <span class="screen_name">@<%=f.screen_name%><span>
+            </div>
+            <div>No. of folowers: <%=f.followers_count%>
+              <% if f.followers_count > 100%>
+                <b style="color:green;">Influencer</b>
+              <%end%>
+            </div>
+            <div class="buttons">
+              <%= link_to "Follow", "follow/"+f.id.to_s, remote: true %>
+              <%= link_to "Delete", "delete/"+f.id.to_s, remote: true, :confirm=>'Are you sure?' %>
+              <div style="display:none;">
+                <span><a href="follow/<%=f.id%>">Follow</a><span>
+                <span><a href="delete/<%=f.id%>">Delete</a><span>
+              </div>
+            </div>
+          </div>
+        </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+</div>

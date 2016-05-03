@@ -1,0 +1,13 @@
+<% if !current_user.nil? %>
+    <div style="display:none;">
+      <p>Click The link below to send a tweet.</p>
+      <%= link_to "Send a Tweet", new_tweet_path %>
+  </div>
+
+    <div id="boxes">
+      <%= render "show" %>
+    </div>
+
+<% else %>
+    <p>You must log in first.</p>
+<% end %>

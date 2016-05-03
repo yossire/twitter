@@ -1,0 +1,14 @@
+var obj = $("#say_hi<%=params[:id]%>");
+
+var object_id = $(obj).attr('object_id');
+var li = $("#li_"+object_id);
+var mask = $(li).find('.mask');
+$(mask).text('Message sent successfully');
+$(mask).show();
+setTimeout(function(){
+  var obj = $("#say_hi<%=params[:id]%>");
+
+  var object_id = $(obj).attr('object_id');
+  var li = $("#li_"+object_id);
+  var mask = $(li).find('.mask');
+  $(mask).hide(); }, 2000);
