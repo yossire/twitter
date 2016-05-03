@@ -98,12 +98,32 @@ class User < ActiveRecord::Base
   end
 
   def unfollow(follower_user_id)
+    @user = User.find(follower_user_id)
+    unless @user.nil?
+      client = Twitter::REST::Client.new do |config|
+        config.consumer_key        = Rails.application.config.twitter_key
+        config.consumer_secret     = Rails.application.config.twitter_secret
+        config.access_token        = oauth_token
+        config.access_token_secret = oauth_secret
+      end
+      client.unfollow(@user.uid.to_i)
+    end
     follower = followers.where(:followed_by_user_id => follower_user_id).first
     follower.status = 1
     follower.save
   end
 
   def follow(follower_user_id)
+    @user = User.find(follower_user_id)
+    unless @user.nil?
+      client = Twitter::REST::Client.new do |config|
+        config.consumer_key        = Rails.application.config.twitter_key
+        config.consumer_secret     = Rails.application.config.twitter_secret
+        config.access_token        = oauth_token
+        config.access_token_secret = oauth_secret
+      end
+      client.follow(@user.uid.to_i)
+    end
     follower = followers.where(:followed_by_user_id => follower_user_id).first
     follower.status = nil
     follower.save
